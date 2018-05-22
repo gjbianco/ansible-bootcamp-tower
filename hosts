@@ -1,0 +1,32 @@
+[internal:vars]
+ansible_become=yes
+ansible_user=ec2-user
+
+[internal:children]
+bastion
+nodes
+postgres
+windows
+
+[bastion]
+bastion.143f.example.opentlc.com
+
+# Ansible Tower nodes
+[nodes]
+tower1 ansible_host=tower1.143f.internal
+tower2 ansible_host=tower2.143f.internal
+tower3 ansible_host=tower3.143f.internal
+
+[postgres]
+# External master PostgreSQL database
+support1 ansible_host=support1.143f.internal
+
+# External slave PostgreSQL database
+support2 ansible_host=support2.143f.internal
+
+[windows]
+ad1.143f.internal
+
+#[isolated]
+# Isolated Node
+#workstation ansible_host=workstation-${OSP_GUID}.rhpds.opentlc.com
